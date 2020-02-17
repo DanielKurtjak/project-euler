@@ -50,7 +50,3 @@ export const mode = pipe(
   reduce(maxBy(nth(1)), ["broj", -1]),
   nth(0)
 );
-
-console.log(`mode ${mode(array)}`);
-console.log(`mean ${mean(array)}`);
-console.log(`median ${median(array)}`);

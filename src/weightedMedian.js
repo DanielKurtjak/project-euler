@@ -10,5 +10,3 @@ export const weigthedMean = converge(divide, [
   compose(sum, zipWith(multiply)),
   compose(sum, nthArg(1))
 ]);
-
-console.log(`weigthedMean ${weigthedMean(values, weigths)}`);
