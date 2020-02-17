@@ -9,6 +9,7 @@ const {
   prop,
   dec,
   identity,
+  length,
   zipWith,
   gt,
   maxBy,
@@ -23,7 +24,6 @@ const {
 } = require("ramda");
 
 const add = (x, y) => x + y;
-E;
 const sub = (x, y) => x - y;
 const div = (x, y) => x / y;
 const mod = (x, y) => x % y;
@@ -56,16 +56,16 @@ const functionalize = fn =>
 const divFn = functionalize(div);
 
 //MEAN
-const mean = divFn(sum, prop("length"));
+const mean = divFn(sum, length);
 
 const avg = unapply(mean);
 const avgF = functionalize(avg);
 
-const lengthDiv2 = compose(Math.floor, div2, prop("length"));
+const lengthDiv2 = compose(Math.floor, div2, length);
 
 //MEADIAN
 const median = ifElse(
-  compose(isOdd, prop("length")),
+  compose(isOdd, length),
   callTwice(compose(prop, lengthDiv2)),
   avgF(
     callTwice(compose(prop, dec, lengthDiv2)),
