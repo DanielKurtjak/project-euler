@@ -5,7 +5,7 @@
   "main": "node.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec \"node node.js\""
+    "start": "nodemon --exec \"node src/node.js\""
   },
   "type": "module",
   "author": "",
