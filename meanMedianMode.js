@@ -1,84 +1,56 @@
+import { arrayFromString } from "./helpers.js";
+import R from "ramda";
+
 const {
-  curry,
-  flip,
   compose,
   pipe,
+  unapply,
   reduce,
-  reduceBy,
   prop,
-  assoc
-} = require("ramda");
+  identity,
+  length,
+  maxBy,
+  equals,
+  nth,
+  dec,
+  sum,
+  countBy,
+  divide,
+  converge,
+  flip,
+  subtract,
+  modulo,
+  ifElse
+} = R;
 
-const add = (x, y) => x + y;
-const sub = (x, y) => x - y;
-const mul = (x, y) => x * y;
-const div = (x, y) => x / y;
-const mod = (x, y) => x % y;
-const equal = (x, y) => x === y;
-const not = x => !x;
-const identity = x => x;
+const array = arrayFromString(" 10 8 6 9").sort(subtract);
 
-const modCurried = curry(flip(mod));
-const divCurried = curry(flip(div));
-const subCurried = curry(flip(sub));
-const eqCurried = curry(equal);
+//MEAN
+const mean = converge(divide, [sum, length]);
+const avg = unapply(mean);
 
-const println = tag => x => (console.log(`${tag}: ${x}`), x);
+const divFlipped = flip(divide);
+const div2 = divFlipped(2);
+const lengthDiv2 = compose(Math.floor, div2, length);
 
-const div2 = divCurried(2);
-const mod2 = modCurried(2);
-const equal1 = eqCurried(1);
-
-const array = "64630 11735 14216 99233 14470 4978 73429 38120 51135 67060"
-  .split(" ")
-  .map(x => parseInt(x))
-  .sort(sub);
-
-const isOdd = pipe(mod2, equal1);
-const isEven = pipe(isOdd, not);
-// const avg = compose(
-//   div,
-//   println("end"),
-//   prop("length"),
-//   println("mid"),
-//   compose(reduce, add),
-//   println("start")
-// );
-
-// const mean = compose(divCurried, flip(reduce)(add), prop("length"));
-const mean = args =>
-  compose(divCurried, prop("length"))(args)(args.reduce(add, 0));
-const avg = (...args) => mean(args);
-
-const lengthDiv2 = compose(div2, prop("length"));
-const median = arr => {
-  const lDiv2 = lengthDiv2(arr);
-  compose(isEven, prop("length"))(arr)
-    ? avg(arr[lDiv2 - 1], arr[lDiv2])
-    : arr[lDiv2 + 1];
-};
-
-const { max: mode } = array.reduce(
-  (
-    { uniqueValues: uniqueValuesArg, max: maxArg, maxCount: maxCountArg },
-    v
-  ) => {
-    const uniqueValues = { ...uniqueValuesArg };
-    let max = maxArg;
-    let maxCount = maxCountArg;
-
-    // uniqueValues[v] = !uniqueValues[v] ? 1 : uniqueValues[v] + 1;
-    const incValue = assoc(v, ifElse(complement(prop(v)), always(1), inc));
-    incValue(uniqueValues);
-    if (uniqueValues[v] > maxCount) {
-      maxCount = uniqueValues[v];
-      max = v;
-    }
-    return { max, maxCount, uniqueValues };
-  },
-  { max: -1, maxCount: -1, uniqueValues: {} }
+// MEADIAN
+const median = ifElse(
+  compose(equals(1), modulo(2), length),
+  converge(prop, [lengthDiv2, identity]),
+  converge(avg, [
+    converge(prop, [compose(dec, lengthDiv2), identity]),
+    converge(prop, [lengthDiv2, identity])
+  ])
 );
 
-console.log(mean(array));
-console.log(median(array));
-console.log(mode);
+//MODE
+const mode = pipe(
+  countBy(identity),
+  Object.entries,
+  reduce(maxBy(nth(1)), ["broj", -1]),
+  nth(0)
+);
+
+console.log(`mode ${mode(array)}`);
+console.log(`mean ${mean(array)}`);
+console.log(`median ${median(array)}`);
