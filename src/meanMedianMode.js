@@ -26,7 +26,7 @@ const {
 const array = arrayFromString(" 10 8 6 9").sort(subtract);
 
 //MEAN
-const mean = converge(divide, [sum, length]);
+export const mean = converge(divide, [sum, length]);
 const avg = unapply(mean);
 
 const divFlipped = flip(divide);
@@ -34,7 +34,7 @@ const div2 = divFlipped(2);
 const lengthDiv2 = compose(Math.floor, div2, length);
 
 // MEADIAN
-const median = ifElse(
+export const median = ifElse(
   compose(equals(1), modulo(2), length),
   converge(prop, [lengthDiv2, identity]),
   converge(avg, [
@@ -44,7 +44,7 @@ const median = ifElse(
 );
 
 //MODE
-const mode = pipe(
+export const mode = pipe(
   countBy(identity),
   Object.entries,
   reduce(maxBy(nth(1)), ["broj", -1]),
