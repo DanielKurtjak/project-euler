@@ -7,11 +7,11 @@ const {
   subtract,
   converge,
   identity,
-  always,
   ifElse,
   sort,
   length,
   inc,
+  take,
   slice
 } = R;
 
@@ -19,7 +19,7 @@ export const quartiles2 = median;
 
 export const quartiles1 = compose(
   median,
-  converge(slice, [always(0), lengthDiv2, identity]),
+  converge(take, [lengthDiv2, identity]),
   sort(subtract)
 );
 
