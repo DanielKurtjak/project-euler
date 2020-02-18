@@ -17,7 +17,7 @@ const divFlipped = flip(divide);
 const modFlipped = flip(mathMod);
 
 export const div2 = divFlipped(2);
-export const lengthDiv2 = compose(Math.floor, div2, length);
 export const mod2 = modFlipped(2);
+export const lengthDiv2 = compose(Math.floor, div2, length);
 export const isOdd = compose(equals(1), mod2);
 export const isEven = complement(isOdd);

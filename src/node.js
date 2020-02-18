@@ -1,8 +1,42 @@
-import { arrayFromString, isOdd } from "./helpers.js";
-import { quartiles1, quartiles2, quartiles3 } from "./quartiles.js";
+import { arrayFromString } from "./helpers.js";
+import { interquartileRange } from "./interquartileRange.js";
+import R from "ramda";
 
-const values = arrayFromString("  3 7 8 5 12 14 21 13 18");
+const {
+  compose,
+  pipe,
+  subtract,
+  apply,
+  unapply,
+  reduce,
+  prop,
+  identity,
+  sort,
+  length,
+  maxBy,
+  nth,
+  dec,
+  sum,
+  countBy,
+  zipWith,
+  divide,
+  repeat,
+  converge,
+  reverse,
+  flatten,
+  ifElse,
+  filter,
+  map,
+  toUpper
+} = R;
 
-console.log(`quartiles1 ${quartiles1(values)}`);
-console.log(`quartiles2 ${quartiles2(values)}`);
-console.log(`quartiles3 ${quartiles3(values)}`);
+const values = arrayFromString(
+  "6 12 8 10 20 16"
+  // "10 40 30 50 20 10 40 30 50 20 1 2 3 4 5 6 7 8 9 10 20 10 40 30 50 20 10 40 30 50"
+);
+const frequences = arrayFromString(
+  "5 4 3 2 1 5"
+  // "1 2 3 4 5 6 7 8 9 10 1 2 3 4 5 6 7 8 9 10 10 40 30 50 20 10 40 30 50 20"
+);
+
+console.log(`interquartileRange ${interquartileRange(values, frequences)}`);
