@@ -1,46 +1,41 @@
-import { arrayFromString } from "./helpers.js";
+import { lengthDiv2, isOdd } from "./helpers.js";
 import R from "ramda";
 
 const {
   compose,
   pipe,
+  subtract,
   unapply,
   reduce,
   prop,
   identity,
+  sort,
   length,
   maxBy,
-  equals,
   nth,
   dec,
   sum,
   countBy,
   divide,
   converge,
-  flip,
-  subtract,
-  modulo,
   ifElse
 } = R;
-
-const array = arrayFromString(" 10 8 6 9").sort(subtract);
 
 //MEAN
 export const mean = converge(divide, [sum, length]);
 const avg = unapply(mean);
 
-const divFlipped = flip(divide);
-const div2 = divFlipped(2);
-const lengthDiv2 = compose(Math.floor, div2, length);
-
 // MEADIAN
-export const median = ifElse(
-  compose(equals(1), modulo(2), length),
-  converge(prop, [lengthDiv2, identity]),
-  converge(avg, [
-    converge(prop, [compose(dec, lengthDiv2), identity]),
-    converge(prop, [lengthDiv2, identity])
-  ])
+export const median = compose(
+  ifElse(
+    compose(isOdd, length),
+    converge(prop, [lengthDiv2, identity]),
+    converge(avg, [
+      converge(prop, [compose(dec, lengthDiv2), identity]),
+      converge(prop, [lengthDiv2, identity])
+    ])
+  ),
+  sort(subtract)
 );
 
 //MODE
