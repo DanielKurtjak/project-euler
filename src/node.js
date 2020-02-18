@@ -1,14 +1,8 @@
-import { arrayFromString } from "./helpers.js";
-import R from "ramda";
+import { arrayFromString, isOdd } from "./helpers.js";
+import { quartiles1, quartiles2, quartiles3 } from "./quartiles.js";
 
-const { compose, zipWith, multiply, nthArg, sum, divide, converge } = R;
+const values = arrayFromString("  3 7 8 5 12 14 21 13 18");
 
-const value = arrayFromString(" 10 40 30 50 3");
-const weigth = arrayFromString(" 1 2 3 4 5");
-
-export const weigthedMean = converge(divide, [
-  compose(sum, zipWith(multiply)),
-  compose(sum, nthArg(1))
-]);
-
-console.log(`weigthedMean ${weigthedMean(value, weigth)}`);
+console.log(`quartiles1 ${quartiles1(values)}`);
+console.log(`quartiles2 ${quartiles2(values)}`);
+console.log(`quartiles3 ${quartiles3(values)}`);
