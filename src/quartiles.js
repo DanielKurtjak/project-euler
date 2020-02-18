@@ -17,7 +17,6 @@ const {
   sort,
   length,
   inc,
-  dec,
   slice
 } = R;
 
