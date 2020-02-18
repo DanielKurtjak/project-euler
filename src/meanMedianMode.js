@@ -18,6 +18,7 @@ const {
   countBy,
   divide,
   converge,
+  toPairs,
   ifElse
 } = R;
 
@@ -25,14 +26,16 @@ const {
 export const mean = converge(divide, [sum, length]);
 const avg = unapply(mean);
 
+const midElement = converge(prop, [lengthDiv2, identity]);
+
 // MEADIAN
 export const median = compose(
   ifElse(
     compose(isOdd, length),
-    converge(prop, [lengthDiv2, identity]),
+    midElement,
     converge(avg, [
       converge(prop, [compose(dec, lengthDiv2), identity]),
-      converge(prop, [lengthDiv2, identity])
+      midElement
     ])
   ),
   sort(subtract)
@@ -41,7 +44,7 @@ export const median = compose(
 //MODE
 export const mode = pipe(
   countBy(identity),
-  Object.entries,
-  reduce(maxBy(nth(1)), ["broj", -1]),
+  toPairs,
+  reduce(maxBy(nth(1)), [Infinity, -Infinity]),
   nth(0)
 );
