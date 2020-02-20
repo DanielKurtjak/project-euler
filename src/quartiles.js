@@ -11,6 +11,7 @@ const {
   sort,
   length,
   inc,
+  chain,
   take,
   slice
 } = R;
@@ -19,7 +20,7 @@ export const quartiles2 = median;
 
 export const quartiles1 = compose(
   median,
-  converge(take, [lengthDiv2, identity]),
+  chain(take, lengthDiv2),
   sort(subtract)
 );
 

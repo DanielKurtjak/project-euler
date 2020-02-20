@@ -7,7 +7,6 @@ const {
   subtract,
   unapply,
   reduce,
-  prop,
   identity,
   sort,
   length,
@@ -15,6 +14,7 @@ const {
   nth,
   dec,
   sum,
+  chain,
   countBy,
   divide,
   converge,
@@ -26,17 +26,14 @@ const {
 export const mean = converge(divide, [sum, length]);
 const avg = unapply(mean);
 
-const midElement = converge(prop, [lengthDiv2, identity]);
+const midElement = chain(nth, lengthDiv2);
 
 // MEADIAN
 export const median = compose(
   ifElse(
     compose(isOdd, length),
     midElement,
-    converge(avg, [
-      converge(prop, [compose(dec, lengthDiv2), identity]),
-      midElement
-    ])
+    converge(avg, [chain(nth, compose(dec, lengthDiv2)), midElement])
   ),
   sort(subtract)
 );
