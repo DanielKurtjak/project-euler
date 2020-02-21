@@ -111,6 +111,33 @@ export const BigNumber = value => ({
   numberOfDigits: () => value.length,
   clone: () => BigNumber(value),
   sumDigits: () => reduce(add, 0, value.split("")),
+  div: number2 => {
+    let n1 = value;
+    let n2 = number2.value;
+    const n2Int = int(n2);
+    const n1Length = n1.length;
+    const n2Length = n2.length;
+    let result = "";
+    let lastIndex = 0;
+    let rem = "";
+    while (lastIndex < n1Length) {
+      let n = int(rem + n1.substr(lastIndex, n2Length));
+      lastIndex += n2Length;
+      if (n < n2Int) {
+        n = int(n + n1[lastIndex++]);
+      }
+      result += int(n / n2Int);
+      rem = "" + (n % n2Int);
+      if (
+        rem == "0" &&
+        "".padEnd(n1Length - lastIndex, "0") === n1.substr(lastIndex)
+      ) {
+        result += n1.substr(lastIndex);
+        break;
+      }
+    }
+    return BigNumber(result);
+  },
   mul: number2 => {
     let n1 = reverse(value);
     let n2 = reverse(number2.value);
