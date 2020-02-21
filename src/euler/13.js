@@ -1,4 +1,6 @@
 //  13  ##################################  13
+import { int } from "./helpers.js";
+const { pow, floor, sqrt, max } = Math;
 
 const bigNumbers = [
   "37107287533902102798797998220837590246510135740250",
@@ -103,8 +105,6 @@ const bigNumbers = [
   "53503534226472524250874054075591789781264330331690"
 ];
 
-const int = str => Number.parseInt(str);
-
 let c = 0;
 let s = "";
 
@@ -117,4 +117,4 @@ for (let i = 49; i >= 0; i--) {
   c = floor(intSum / 10);
 }
 s = c + s;
-console.log(s);
+console.log(s.substr(0, 10));

@@ -1,12 +1,13 @@
 //  10  ##################################  10
+import { nextPrime } from "./helpers.js";
 
 const N = 2e6;
 let prime = 1;
-let suma = 0;
+let sum = 0;
 do {
   prime = nextPrime(prime, N);
-  if (prime !== false) suma += prime;
+  if (prime !== false) sum += prime;
   else break;
 } while (true);
 
-console.log(suma);
+console.log(sum);

@@ -1,4 +1,10 @@
 //  5  ##################################  5
+import R from "ramda";
+import { primeFactors } from "./helpers.js";
+
+const { __, countBy, map, identity } = R;
+
+const { pow, max } = Math;
 
 const maxCountsByPrime = {};
 const factors = [];

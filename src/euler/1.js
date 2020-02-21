@@ -1,32 +1,5 @@
 import R from "ramda";
-const {
-  __,
-  add,
-  append,
-  curry,
-  flip,
-  binary,
-  unary,
-  compose,
-  multiply,
-  sum,
-  filter,
-  either,
-  reverse,
-  equals,
-  modulo,
-  sort,
-  flatten,
-  toPairs,
-  reduce,
-  countBy,
-  map,
-  split,
-  identity,
-  range
-} = R;
-
-const { pow, floor, sqrt, max } = Math;
+const { __, compose, sum, filter, either, equals, modulo, range } = R;
 
 export const sumMod3andMod6 = compose(
   sum,
@@ -35,3 +8,5 @@ export const sumMod3andMod6 = compose(
   ),
   range(1)
 );
+
+console.log(sumMod3andMod6(1000));

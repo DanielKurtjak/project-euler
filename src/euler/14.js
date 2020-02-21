@@ -1,4 +1,5 @@
 const collatz = n => (n % 2 === 0 ? n / 2 : 3 * n + 1);
+
 const terms = num => {
   let c = num;
   let a = [num];
@@ -15,12 +16,13 @@ const NUM = 1e6;
 let num = 1;
 let maxCount = 0;
 let maxNum = "";
+
 while (num < NUM) {
   const [a, count] = terms(num);
   if (count > maxCount) {
     maxCount = count;
     maxNum = num;
-    console.log({ maxCount, maxNum });
   }
   num++;
 }
+console.log({ maxCount, maxNum });

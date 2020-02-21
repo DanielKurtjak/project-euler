@@ -1,4 +1,5 @@
 //  9  ##################################  9
+import { square } from "./helpers.js";
 
 let a;
 let b;

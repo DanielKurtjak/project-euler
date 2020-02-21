@@ -1,4 +1,5 @@
 //  7  ##################################  7
+import { nextPrime } from "./helpers.js";
 
 let count = 1;
 let prime = 2;

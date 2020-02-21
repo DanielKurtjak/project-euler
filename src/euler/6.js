@@ -1,4 +1,8 @@
 //  6  ##################################  6
+import R from "ramda";
+import { square } from "./helpers.js";
+
+const { add, reduce, map, range, subtract } = R;
 
 const sqDiff = n =>
   subtract(
