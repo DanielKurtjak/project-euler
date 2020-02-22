@@ -33,7 +33,7 @@ const {
 const { pow, floor, sqrt, max } = Math;
 
 export const isPrime = n => {
-  if (n == 1) return false;
+  if (n <= 1) return false;
   if (n < 4) return true; //2 and 3 are prime
   if (n % 2 == 0) return false;
   if (n % 3 == 0) return false;
@@ -110,6 +110,7 @@ export const BigNumber = value => ({
   fold: () => value,
   numberOfDigits: () => value.length,
   clone: () => BigNumber(value),
+  digits: () => value.split(""),
   sumDigits: () => reduce(add, 0, value.split("")),
   div: number2 => {
     let n1 = value;
