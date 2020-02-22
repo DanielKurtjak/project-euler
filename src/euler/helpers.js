@@ -2,6 +2,7 @@ import R from "ramda";
 const {
   __,
   add,
+  inc,
   append,
   curry,
   flip,
@@ -27,7 +28,9 @@ const {
   uniq,
   split,
   identity,
-  range
+  range,
+  memoizeWith,
+  product
 } = R;
 
 const { pow, floor, sqrt, max } = Math;
@@ -92,7 +95,9 @@ export const primeFactors = num => {
 
 export const square = x => pow(x, 2);
 export const int = str => Number.parseInt(str);
-export const fact = n => reduce(multiply, 1, range(1, n));
+
+// export const fact = compose(product, range(1), inc);
+export const fact = memoizeWith(identity, compose(product, range(1), inc));
 
 export const isPal = string => string + "" === reverse(string + "");
 
