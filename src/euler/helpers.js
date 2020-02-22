@@ -35,14 +35,17 @@ const {
 
 const { pow, floor, sqrt, max } = Math;
 
+export const isString = myVar =>
+  typeof myVar === "string" || myVar instanceof String;
+
 export const isPrime = n => {
   if (n <= 1) return false;
-  if (n < 4) return true; //2 and 3 are prime
+  if (n < 4) return true;
   if (n % 2 == 0) return false;
   if (n % 3 == 0) return false;
-  if (n <= 9) return true; //we have already excluded 4,6 and 8.
+  if (n <= 9) return true;
 
-  let r = floor(sqrt(n)); // n rounded to the greatest integer r so that r*r<=n
+  let r = floor(sqrt(n));
   let f = 5;
   while (f <= r) {
     if (n % f == 0) return false;
@@ -51,6 +54,15 @@ export const isPrime = n => {
   }
   return true;
 };
+
+let counter = 0;
+const count = n => {
+  counter++;
+  return n;
+};
+export const getCalls = () => counter;
+
+export const isPrimeMemoized = memoizeWith(identity, isPrime);
 
 export const getProperDividers = number => getDividersInternal(false, number);
 export const getDividers = number => getDividersInternal(true, number);
@@ -78,6 +90,34 @@ export const nextPrime = (n, num) => {
   return false;
 };
 
+export const ascDigits = value =>
+  value ===
+  value
+    .split("")
+    .sort()
+    .join("");
+
+export const permutations = value => {
+  const isStringValue = isString(value);
+  const array = isStringValue ? value.split("") : value;
+  const len = array.length;
+  const result = [];
+  const permute = (prev, indicesIncluded) => {
+    if (prev.length === len) {
+      result.push(isStringValue ? prev.join("") : prev);
+      return;
+    }
+    for (let i = 0; i < len; i++) {
+      if (indicesIncluded.includes(i)) continue;
+      permute(prev.concat(array[i]), indicesIncluded.concat(i));
+    }
+  };
+  permute([], []);
+  return uniq(result);
+};
+
+export const charPermutations = memoizeWith(identity, permutations);
+
 export const primeFactors = num => {
   let f = [];
   let n = num;
@@ -96,7 +136,6 @@ export const primeFactors = num => {
 export const square = x => pow(x, 2);
 export const int = str => Number.parseInt(str);
 
-// export const fact = compose(product, range(1), inc);
 export const fact = memoizeWith(identity, compose(product, range(1), inc));
 
 export const isPal = string => string + "" === reverse(string + "");
@@ -108,6 +147,8 @@ String.prototype.replaceAt = function(index, replacement) {
     this.substr(index + replacement.length)
   );
 };
+
+export const rotateString = str => str.substr(1) + str[0];
 
 export const BigNumber = value => ({
   value,

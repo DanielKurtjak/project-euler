@@ -1,50 +1,27 @@
 import R from "ramda";
-import "./28.js";
+import "./35.js";
 
 import {
   BigNumber,
   isPal,
   isPrime,
+  isPrimeMemoized,
   nextPrime,
   primeFactors,
   square,
   int,
   fact,
   getDividers,
-  getProperDividers
+  getProperDividers,
+  permutations,
+  charPermutations,
+  getCalls,
+  ascDigits,
+  rotateString
 } from "./helpers.js";
 
-const {
-  __,
-  add,
-  append,
-  curry,
-  flip,
-  binary,
-  xprod,
-  unary,
-  filter,
-  compose,
-  toString,
-  multiply,
-  sum,
-  either,
-  reverse,
-  repeat,
-  equals,
-  modulo,
-  sort,
-  flatten,
-  toPairs,
-  reduce,
-  countBy,
-  length,
-  map,
-  split,
-  subtract,
-  identity,
-  uniq,
-  range
-} = R;
-
+const { __, T, indentity, add, append, curry, flip, binary, xprod, reduce } = R;
+const { unary, filter, compose, toString, multiply, sum, either, all } = R;
+const { reverse, repeat, equals, modulo, sort, flatten, toPairs } = R;
+const { countBy, length, map, split, subtract, identity, uniq, range } = R;
 const { pow, floor, sqrt, max } = Math;
