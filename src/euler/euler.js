@@ -1,6 +1,6 @@
 import R from "ramda";
 
-import "./357.js";
+import "./41.js";
 
 import {
   BigNumber,
@@ -12,34 +12,26 @@ import {
   square,
   int,
   fact,
-  getDividers,
+  getDivisors,
   getBinaryRepresentation,
   getPrimesToNumber,
-  getProperDividers,
+  getProperDivisors,
   permutations,
   charPermutations,
   getCalls,
   ascDigits,
-  rotateString
+  rotateString,
+  getTriangle,
+  getPentagonal,
+  getHexagonal,
+  isPentagonal,
+  isHexagonal,
+  isTriangle
 } from "./helpers.js";
 
 const { __, T, indentity, add, append, curry, flip, binary, xprod } = R;
 const { unary, filter, compose, toString, multiply, sum, either, all } = R;
 const { reverse, repeat, equals, modulo, sort, flatten, toPairs } = R;
 const { countBy, length, map, split, subtract, identity, uniq, range } = R;
-const { divide, chain, reduce } = R;
+const { divide, chain, reduce, product, nth } = R;
 const { pow, floor, sqrt, max } = Math;
-
-const makeFormula = n => chain(add, divide(n));
-
-const LIMIT = 1e8;
-let s = 0;
-for (let n = 1; n < LIMIT; n++) {
-  const dividers = getDividers(n);
-  const allDividersArePrime = all(compose(isPrimeMemoized, makeFormula(n)));
-  if (allDividersArePrime(dividers)) {
-    s += n;
-  }
-}
-
-console.log(s);
