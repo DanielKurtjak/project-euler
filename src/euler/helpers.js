@@ -83,6 +83,24 @@ const getDividersInternal = (addNumberAsWell, number) => {
   return addNumberAsWell ? dividers.push(number) : dividers;
 };
 
+const getPrimesToNumberWithFn = (fn, n) => {
+  let prime = 2;
+  const primes = [prime];
+
+  for (let i = prime + 1; i < n; i++) {
+    if (fn(i)) {
+      primes.push(i);
+    }
+  }
+
+  return primes;
+};
+
+export const getPrimesToNumber = curry(getPrimesToNumberWithFn)(isPrime);
+export const getMemoizedPrimesToNumber = curry(getPrimesToNumberWithFn)(
+  isPrimeMemoized
+);
+
 export const getBinaryRepresentation = num => {
   let n = num;
   let b = "";
