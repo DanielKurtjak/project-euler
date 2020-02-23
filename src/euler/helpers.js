@@ -80,7 +80,8 @@ const getDividersInternal = (addNumberAsWell, number) => {
     }
   }
 
-  return addNumberAsWell ? dividers.push(number) : dividers;
+  if (addNumberAsWell) dividers.push(number);
+  return dividers;
 };
 
 const getPrimesToNumberWithFn = (fn, n, startingPrime = 2) => {
@@ -112,7 +113,8 @@ export const getBinaryRepresentation = num => {
 };
 
 export const nextPrime = (n, num) => {
-  for (let i = n + 1; i < num; i++) {
+  if (n === 2) return 3;
+  for (let i = n + 2; i < num; i += 2) {
     if (isPrime(i)) return i;
   }
   return false;
