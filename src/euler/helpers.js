@@ -83,6 +83,16 @@ const getDividersInternal = (addNumberAsWell, number) => {
   return addNumberAsWell ? dividers.push(number) : dividers;
 };
 
+export const getBinaryRepresentation = num => {
+  let n = num;
+  let b = "";
+  while (n) {
+    b = (n % 2) + b;
+    n = n >> 1;
+  }
+  return b;
+};
+
 export const nextPrime = (n, num) => {
   for (let i = n + 1; i < num; i++) {
     if (isPrime(i)) return i;
