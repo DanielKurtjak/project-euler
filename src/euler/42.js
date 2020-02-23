@@ -10,3 +10,12 @@
 
 // Using words.txt (right click and 'Save Link/Target As...'), a 16K text file containing
 //  nearly two-thousand common English words, how many are triangle words?
+import words from "./resources/42.js";
+import { isTriangle, wordLettersSum } from "./helpers.js";
+
+let counter = 0;
+for (let word of words) {
+  if (isTriangle(wordLettersSum(word))) counter++;
+}
+
+console.log({ counter });

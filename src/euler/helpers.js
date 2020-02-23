@@ -148,6 +148,14 @@ export const ascDigits = value =>
     .sort()
     .join("");
 
+const offset = "A".charCodeAt(0) - 1;
+
+export const wordLettersSum = word =>
+  word
+    .split("")
+    .map(char => char.charCodeAt(0) - offset)
+    .reduce(add, 0);
+
 export const permutations = value => {
   const isStringValue = isString(value);
   const array = isStringValue ? value.split("") : value;
