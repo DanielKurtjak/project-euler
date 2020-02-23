@@ -1,3 +1,9 @@
+// The number, 197, is called a circular prime because all rotations of the digits: 197, 971, and 719, are themselves prime.
+
+// There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, and 97.
+
+// How many circular primes are there below one million?
+
 import R from "ramda";
 import { rotateString, isPrime, isPrimeMemoized } from "./helpers.js";
 
@@ -5,14 +11,14 @@ const { all, uniq } = R;
 
 const allArePrime = all(isPrimeMemoized);
 
-const isSutable = stringNum => {
-  let digits = stringNum.split("");
-  if (digits.includes("0")) return false;
-  if (digits.includes("2")) return false;
-  if (digits.includes("5")) return false;
+// const isSutable = stringNum => {
+//   let digits = stringNum.split("");
+//   if (digits.includes("0")) return false;
+//   if (digits.includes("2")) return false;
+//   if (digits.includes("5")) return false;
 
-  return digits.sort().join("") === stringNum;
-};
+//   return digits.sort().join("") === stringNum;
+// };
 
 const getRotations = string => {
   const result = [string];
