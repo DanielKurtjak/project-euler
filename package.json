@@ -2,17 +2,23 @@
   "name": "fp-test",
   "version": "1.0.0",
   "description": "",
-  "main": "node.js",
+  "main": "src/node.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec \"node src/node.js\"",
-    "euler": "nodemon --exec \"node src/euler/euler.js\""
+    "test": "jest --watchAll",
+    "start": "nodemon --exec \"node -r esm src/node.js\"",
+    "euler": "nodemon --exec \"node -r esm src/euler/euler.js\""
   },
-  "type": "module",
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "esm": "^3.2.25",
     "nodemon": "^2.0.2",
     "ramda": "^0.27.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "babel-jest": "^25.1.0",
+    "jest": "^25.1.0"
   }
 }

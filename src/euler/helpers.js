@@ -64,24 +64,23 @@ export const getCalls = () => counter;
 
 export const isPrimeMemoized = memoizeWith(identity, isPrime);
 
-export const getProperDividers = number => getDividersInternal(false, number);
-export const getDividers = number => getDividersInternal(true, number);
-const getDividersInternal = (addNumberAsWell, number) => {
-  let dividers = [1];
-
-  if (number === 1) return dividers;
+export const getProperDivisors = number => getDivisorsInternal(false, number);
+export const getDivisors = number => getDivisorsInternal(true, number);
+const getDivisorsInternal = (addNumberAsWell, number) => {
+  if (number === 1) return [1];
+  let divisors = [1];
 
   let t2 = floor(sqrt(number));
 
-  for (let divider = 2; divider <= t2; divider++) {
-    if (number % divider === 0) {
-      dividers.push(divider);
-      if (number / divider !== divider) dividers.push(number / divider);
+  for (let divisor = 2; divisor <= t2; divisor++) {
+    if (number % divisor === 0) {
+      divisors.push(divisor);
+      if (number / divisor !== divisor) divisors.push(number / divisor);
     }
   }
 
-  if (addNumberAsWell) dividers.push(number);
-  return dividers;
+  if (addNumberAsWell) divisors.push(number);
+  return divisors;
 };
 
 const getPrimesToNumberWithFn = (fn, n, startingPrime = 2) => {
