@@ -1,5 +1,6 @@
 import R from "ramda";
-import "./36.js";
+
+import "./39.js";
 
 import {
   BigNumber,
@@ -12,6 +13,8 @@ import {
   int,
   fact,
   getDividers,
+  getBinaryRepresentation,
+  getPrimesToNumber,
   getProperDividers,
   permutations,
   charPermutations,

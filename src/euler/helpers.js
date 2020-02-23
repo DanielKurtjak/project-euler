@@ -83,8 +83,8 @@ const getDividersInternal = (addNumberAsWell, number) => {
   return addNumberAsWell ? dividers.push(number) : dividers;
 };
 
-const getPrimesToNumberWithFn = (fn, n) => {
-  let prime = 2;
+const getPrimesToNumberWithFn = (fn, n, startingPrime = 2) => {
+  let prime = startingPrime;
   const primes = [prime];
 
   for (let i = prime + 1; i < n; i++) {
