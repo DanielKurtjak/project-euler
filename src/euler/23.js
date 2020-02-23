@@ -6,11 +6,11 @@
 
 // Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 import R from "ramda";
-import { getProperDividers } from "./helpers.js";
+import { getProperdivisors } from "./helpers.js";
 
 const { filter, sum, range, uniq } = R;
 
-const isAbundant = n => n < sum(getProperDividers(n));
+const isAbundant = n => n < sum(getProperdivisors(n));
 
 const LIMIT = 28123;
 const abundants = filter(isAbundant, range(1, LIMIT >> 1));

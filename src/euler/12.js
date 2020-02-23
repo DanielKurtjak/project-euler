@@ -15,18 +15,18 @@
 
 // What is the value of the first triangle number to have over five hundred divisors?
 //  12  ##################################  12
-import { getDividers } from "./helpers.js";
+import { getDivisors } from "./helpers.js";
 
 const getTri = index => (index * (index + 1)) / 2;
-const COUNT_OF_DIVIDERS = 500;
+const COUNT_OF_divisorS = 500;
 
-const calcCount = i => (i === 1 ? [1] : getDividers(getTri(i)));
+const calcCount = i => (i === 1 ? [1] : getDivisors(getTri(i)));
 
 let i = 10000;
 while (true) {
-  let dividers = calcCount(i);
+  let divisors = calcCount(i);
 
-  if (dividers.length >= COUNT_OF_DIVIDERS) {
+  if (divisors.length >= COUNT_OF_divisorS) {
     break;
   }
   i++;
