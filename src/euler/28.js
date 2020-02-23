@@ -9,3 +9,17 @@
 // It can be verified that the sum of the numbers on the diagonals is 101.
 
 // What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?
+let index = 0;
+const DIMENSIONS = 1001;
+let num = 1;
+let s = 1;
+while (num < DIMENSIONS * DIMENSIONS) {
+  const step = 2 * index + 2;
+  for (let i = 0; i < 4; i++) {
+    num += step;
+    s += num;
+  }
+  index++;
+}
+
+console.log(s);
