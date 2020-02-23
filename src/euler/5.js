@@ -1,5 +1,7 @@
-// 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
-// What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+// 2520 is the smallest number that can be divided by each of the numbers from 1 to 10
+//  without any remainder.
+// What is the smallest positive number that is evenly divisible by all of the numbers
+//  from 1 to 20?
 
 //  5  ##################################  5
 import R from "ramda";
@@ -11,7 +13,8 @@ const { pow, max } = Math;
 
 const maxCountsByPrime = {};
 const factors = [];
-for (let i = 2; i < 20; i++) {
+const LIMIT = 20;
+for (let i = 2; i < LIMIT; i++) {
   factors.push(primeFactors(i));
 }
 
