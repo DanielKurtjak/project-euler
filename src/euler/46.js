@@ -1,3 +1,7 @@
+import { getPrimesToNumber } from "./helpers";
+
+const { floor, sqrt } = Math;
+
 // It was proposed by Christian Goldbach that every odd composite number
 //  can be written as the sum of a prime and twice a square.
 
@@ -12,3 +16,30 @@
 
 // What is the smallest odd composite that cannot be written as the sum of a prime
 //  and twice a square?
+
+const LIMIT = 1e4;
+const primes = getPrimesToNumber(LIMIT).slice(1);
+let searchingFor = 0;
+let found = false;
+for (let number = 35; number < LIMIT; number += 2) {
+  if (primes.includes(number)) continue;
+  found = false;
+
+  for (let prime of primes) {
+    if (prime > number - 2) {
+      break;
+    }
+    const pRoot = (number - prime) >> 1;
+    const sqRoot = floor(sqrt(pRoot));
+    if (sqRoot * sqRoot * 2 + prime === number) {
+      found = true;
+      break;
+    }
+  }
+
+  if (!found) {
+    searchingFor = number;
+    break;
+  }
+}
+console.log(searchingFor);
