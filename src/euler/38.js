@@ -11,3 +11,41 @@
 
 // What is the largest 1 to 9 pandigital 9-digit number that can be formed as
 //  the concatenated product of an integer with (1,2, ... , n) where n > 1?
+
+let largest = 0;
+const LOWEST_PANDIGITAL = 123456789;
+const LOWEST_PANDIGITAL_STR = String(LOWEST_PANDIGITAL);
+const HIGHEST_PANDIGITAL = 987654321;
+const PANDIGITAL_LENGTH = LOWEST_PANDIGITAL_STR.length;
+
+const isConcatPandigital = concat => {
+  if (concat.length !== PANDIGITAL_LENGTH) return false;
+  if (Number(concat) > HIGHEST_PANDIGITAL) return false;
+
+  return (
+    concat
+      .split("")
+      .sort()
+      .join("") === LOWEST_PANDIGITAL_STR
+  );
+};
+
+const checkIfSomeProductIsPandigital = num => {
+  let concatProduct = "" + num;
+  for (let n = 2; n < 10 - String(num).length; n++) {
+    concatProduct += n * num;
+    if (isConcatPandigital(concatProduct)) {
+      return concatProduct;
+    }
+  }
+  return false;
+};
+
+for (let i = 1; i < 100000; i++) {
+  const concatProduct = checkIfSomeProductIsPandigital(i);
+  if (concatProduct && Number(concatProduct) > largest) {
+    largest = Number(concatProduct);
+  }
+}
+
+console.log(largest);
