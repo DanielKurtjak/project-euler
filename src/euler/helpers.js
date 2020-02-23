@@ -38,6 +38,28 @@ const { pow, floor, sqrt, max } = Math;
 export const isString = myVar =>
   typeof myVar === "string" || myVar instanceof String;
 
+export const getTriangle = n => (n * (n + 1)) >> 1;
+export const getPentagonal = n => (n * (3 * n - 1)) >> 1;
+export const getHexagonal = n => n * (2 * n - 1);
+
+export const isTriangle = n => {
+  const D = sqrt(1 + 8 * n);
+  let x1 = floor(D - 1) >> 1;
+  return getTriangle(x1) === n ? x1 : false;
+};
+
+export const isPentagonal = n => {
+  const D = sqrt(1 + 24 * n);
+  let x1 = floor((1 + D) / 6);
+  return getPentagonal(x1) === n ? x1 : false;
+};
+
+export const isHexagonal = n => {
+  const D = sqrt(1 + 8 * n);
+  let x1 = floor((1 + D) / 4);
+  return getHexagonal(x1) === n ? x1 : false;
+};
+
 export const isPrime = n => {
   if (n <= 1) return false;
   if (n < 4) return true;
