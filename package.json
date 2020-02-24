@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --watchAll",
     "start": "nodemon --exec \"node -r esm src/node.js\"",
-    "euler": "nodemon --exec \"node -r esm src/euler/euler.js\""
+    "euler": "nodemon --exec \"node -r esm src/euler/euler.js\"",
+    "codility": "nodemon --exec \"node -r esm src/codility/index.js\""
   },
   "author": "",
   "license": "ISC",
