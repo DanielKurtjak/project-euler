@@ -25,6 +25,7 @@ const solution = s => {
     if (opening.includes(b)) {
       stack.push(b);
     } else {
+      //bitno ako nema para
       if (stack.length == 0) return 0;
       const popped = stack.pop();
       if (popped === "(" && b !== ")") return 0;
@@ -32,6 +33,7 @@ const solution = s => {
       if (popped === "{" && b !== "}") return 0;
     }
   }
+  //Bitno ako je ostalo nezatvorenih!
   return stack.length ? 0 : 1;
 };
 
