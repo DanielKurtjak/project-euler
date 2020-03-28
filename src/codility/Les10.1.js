@@ -14,8 +14,15 @@
 
 // N is an integer within the range [1..2,147,483,647].
 
-const solution = a => {};
+const solution = a => {
+  if (a === 1) return 1;
+  let count = 2;
+  let i;
+  for (i = 2; i * i < a; i++) {
+    if (a % i === 0) count += 2;
+  }
+  if (a === i * i) count++;
+  return count;
+};
 
-const A = [];
-
-console.log(solution(A));
+console.log(solution(16));
