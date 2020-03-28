@@ -22,8 +22,10 @@
 
 // N is an integer within the range [1..1,000,000,000].
 
-const solution = a => {};
+const solution = a => {
+  for (let n = Math.ceil(Math.sqrt(a)); n > 0; n--) {
+    if (a % n === 0) return 2 * n + 2 * (a / n);
+  }
+};
 
-const A = [];
-
-console.log(solution(A));
+console.log(solution(30));
