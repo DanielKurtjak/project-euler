@@ -44,8 +44,32 @@
 // N is an integer within the range [3..100,000];
 // each element of array A is an integer within the range [−10,000..10,000].
 
-const solution = a => {};
+const solution = a => {
+  const len = a.length;
+  let ending = Array(len + 1).fill(0);
+  let starting = Array(len + 1).fill(0);
+
+  for (let i = 1; i < len; i++) {
+    starting[len - i - 1] = Math.max(0, starting[len - i] + a[len - i - 1]);
+    ending[i] = Math.max(0, ending[i - 1] + a[i]);
+  }
+
+  let maxDoubleSlice = 0;
+
+  for (let i = 1; i < len - 1; i++) {
+    maxDoubleSlice = Math.max(maxDoubleSlice, starting[i + 1] + ending[i - 1]);
+  }
+
+  return maxDoubleSlice;
+};
 
 const A = [];
-
+A[0] = 3;
+A[1] = 2;
+A[2] = 6;
+A[3] = -1;
+A[4] = 4;
+A[5] = 5;
+A[6] = -1;
+A[7] = 2;
 console.log(solution(A));
