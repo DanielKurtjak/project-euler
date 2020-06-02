@@ -37,22 +37,45 @@
 // N is an integer within the range [0..400,000];
 // each element of array A is an integer within the range [0..200,000].
 
-const solution = a => {
+const solution = (a) => {
   const len = a.length;
   let max = 0;
-  for (let i = 0; i < len - 1; i++) {
-    for (let j = i + 1; j < len; j++) {
-      max = Math.max(a[j] - a[i], max);
+
+  let direction = Math.sign(a[1] - a[0]);
+  let maxProfit = 0;
+  let min = a[0];
+
+  const isMinimum = (newDirection, direction) =>
+    newDirection !== direction && newDirection >= 0;
+  const isMaximum = (newDirection, direction) =>
+    newDirection !== direction && newDirection <= 0;
+
+  for (let i = 1; i < len; i++) {
+    let newDirection = Math.sign(a[i] - a[i - 1]);
+    if (isMinimum(newDirection, direction)) {
+      if (a[i - 1] < min) min = a[i - 1];
     }
+    if (isMaximum(newDirection, direction)) {
+      if (a[i - 1] - min > maxProfit) maxProfit = a[i - 1] - min;
+    }
+    direction = newDirection;
   }
-  return max;
+
+  if (a[len - 1] - min > maxProfit) maxProfit = a[len - 1] - min;
+
+  return maxProfit;
 };
 
 const A = [];
-A[0] = 23171;
-A[1] = 21011;
-A[2] = 21123;
-A[3] = 21366;
-A[4] = 21013;
-A[5] = 21367;
+A[0] = 1;
+A[1] = 2;
+A[2] = 3;
+A[3] = 4;
+A[4] = 1;
+// A[0] = 23171;
+// A[1] = 21011;
+// A[2] = 21123;
+// A[3] = 21366;
+// A[4] = 21013;
+// A[5] = 21367;
 console.log(solution(A));
