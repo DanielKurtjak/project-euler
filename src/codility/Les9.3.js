@@ -23,8 +23,31 @@
 // each element of array A is an integer within the range [−1,000,000..1,000,000];
 // the result will be an integer within the range [−2,147,483,648..2,147,483,647].
 
-const solution = a => {};
+const solution = A => {
+  let maxNum = -Infinity;
+  let max = 0;
+  let slice = -Infinity;
+  for (let a of A) {
+    if (maxNum < a) maxNum = a;
+  }
+
+  if (maxNum < 0) return maxNum;
+
+  for (let a of A) {
+    max = Math.max(0, max + a);
+    slice = Math.max(slice, max);
+  }
+  return slice;
+};
 
 const A = [];
 
+A[0] = -3;
+// A[0] = 3;
+// A[1] = -1;
+// A[0] = 3;
+// A[1] = 2;
+// A[2] = -6;
+// A[3] = 4;
+// A[4] = 0;
 console.log(solution(A));

@@ -33,18 +33,18 @@
 // N is an integer within the range [2..100,000];
 // each element of array A is an integer within the range [−10,000..10,000].
 
-const solution = a => {
+const solution = (a) => {
   let minSum = Infinity;
   let index = 0;
   const len = a.length;
   for (let i = 0; i < len - 1; i++) {
-    const avg = a[i] + a[i + 1] / 2;
+    const avg = (a[i] + a[i + 1]) / 2;
     if (avg < minSum) {
       minSum = avg;
       index = i;
     }
-    if (len - 2 && avg * 2 + a[i + 2] / 3 < minSum) {
-      minSum = a[i] + a[i + 1] + a[i + 2] / 3;
+    if (len - 2 && (a[i] + a[i + 1] + a[i + 2]) / 3 < minSum) {
+      minSum = (a[i] + a[i + 1] + a[i + 2]) / 3;
       index = i;
     }
   }

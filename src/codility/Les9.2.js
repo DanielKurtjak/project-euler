@@ -37,8 +37,22 @@
 // N is an integer within the range [0..400,000];
 // each element of array A is an integer within the range [0..200,000].
 
-const solution = a => {};
+const solution = a => {
+  const len = a.length;
+  let max = 0;
+  for (let i = 0; i < len - 1; i++) {
+    for (let j = i + 1; j < len; j++) {
+      max = Math.max(a[j] - a[i], max);
+    }
+  }
+  return max;
+};
 
 const A = [];
-
+A[0] = 23171;
+A[1] = 21011;
+A[2] = 21123;
+A[3] = 21366;
+A[4] = 21013;
+A[5] = 21367;
 console.log(solution(A));

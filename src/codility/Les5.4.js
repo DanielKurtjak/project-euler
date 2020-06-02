@@ -42,28 +42,15 @@
 // N is an integer within the range [1..100,000];
 // each element of array A is an integer that can have one of the following values: 0, 1.
 
-const solution = A => {
-  const len = A.length;
-  const sum = Array(len + 1);
-
-  const countDiffDirection = direction => x => x !== direction;
-  const direction = countDiffDirection(A[0]);
-  sum[0] = 0;
-
-  for (let i = 0; i < len; i++) {
-    sum[i + 1] = direction(A[i]) ? sum[i] + 1 : sum[i];
-  }
-
-  const limit = 1e9;
-  const totalToWest = sum[len];
+const solution = (A) => {
   let count = 0;
-  for (let i = 0; i < len; i++) {
-    if (!direction(A[i])) {
-      count += totalToWest - sum[i];
-      if (count > limit) return -1;
-    }
+  let sum = 0;
+  for (let i = 0; i < A.length; i++) {
+    if (!A[i]) count++;
+    else sum += count;
   }
-  return count;
+
+  return sum;
 };
 
 const A = [];

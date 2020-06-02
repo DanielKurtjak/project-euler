@@ -38,29 +38,47 @@
 
 // that, given a non-empty array A of N integers, returns the maximum number of flags that can be set on the peaks of the array.
 
-// For example, the following array A:
-
-//     A[0] = 1
-//     A[1] = 5
-//     A[2] = 3
-//     A[3] = 4
-//     A[4] = 3
-//     A[5] = 4
-//     A[6] = 1
-//     A[7] = 2
-//     A[8] = 3
-//     A[9] = 4
-//     A[10] = 6
-//     A[11] = 2
-// the function should return 3, as explained above.
+// For example given example the function should return 3, as explained above.
 
 // Write an efficient algorithm for the following assumptions:
 
 // N is an integer within the range [1..400,000];
 // each element of array A is an integer within the range [0..1,000,000,000].
 
-const solution = a => {};
+const solution = a => {
+  const len = a.length;
+  const peaks = Array(len);
+  const distances = Array(len);
+  let size = 0;
+  let min = len;
+  let max = 0;
+  distances[0] = 0;
+  let distancesSize = 0;
+  for (let i = 1; i < len - 1; i++) {
+    const v = a[i];
+    if (a[i - 1] < v && v > a[i + 1]) {
+      const distance = i - peaks[size - 1];
+      if (size && distance < min) min = distance;
+      else if (distance > max) max = distance;
+      if (size) distances[distancesSize++] = distance;
+      peaks[size++] = i;
+    }
+  }
+  return { min, max, peaks, distances };
+};
 
 const A = [];
+A[0] = 1;
+A[1] = 5;
+A[2] = 3;
+A[3] = 4;
+A[4] = 3;
+A[5] = 4;
+A[6] = 1;
+A[7] = 2;
+A[8] = 3;
+A[9] = 4;
+A[10] = 6;
+A[11] = 2;
 
 console.log(solution(A));
