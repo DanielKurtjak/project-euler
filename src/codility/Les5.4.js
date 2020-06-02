@@ -48,6 +48,8 @@ const solution = (A) => {
   for (let i = 0; i < A.length; i++) {
     if (!A[i]) count++;
     else sum += count;
+
+    if (sum > 1e9) return -1;
   }
 
   return sum;
