@@ -71,8 +71,62 @@
 // N is an integer within the range [1..100,000];
 // each element of array A is an integer within the range [0..1,000,000,000].
 
-const solution = a => {};
+const calcFactors = (a) => {
+  const arrayOfFactors = [1];
+  if (a === 1) return arrayOfFactors;
+  let i;
+  for (i = 2; i * i < a; i++) {
+    if (a % i === 0) {
+      arrayOfFactors.push(i);
+      arrayOfFactors.push(a / i);
+    }
+  }
+  if (a === i * i) arrayOfFactors.push(i);
+  return arrayOfFactors.sort((a, b) => b - a);
+};
+
+const solution = (a) => {
+  const len = a.length;
+  if (len < 3) return 0;
+
+  const factors = calcFactors(len);
+  const prefixSum = Array(len + 1).fill(0);
+
+  const isPeak = (a, i) => a[i - 1] < a[i] && a[i] > a[i + 1];
+  for (let i = 1; i < len - 1; i++) {
+    prefixSum[i + 1] = prefixSum[i] + Number(isPeak(a, i));
+  }
+
+  prefixSum[len] = prefixSum[len - 1];
+
+  if (prefixSum[len] - prefixSum[0] === 0) return 0;
+
+  for (let numOfBlocks of factors) {
+    let block;
+    const blockSize = Math.ceil(len / numOfBlocks);
+    for (block = 0; block < numOfBlocks; block++) {
+      const blockStartIndex = block * blockSize;
+      const blockEndIndex = (block + 1) * blockSize;
+      if (prefixSum[blockEndIndex] - prefixSum[blockStartIndex] === 0) break;
+    }
+    if (block === numOfBlocks) return numOfBlocks;
+  }
+
+  return 0;
+};
 
 const A = [];
+A[0] = 1;
+A[1] = 2;
+A[2] = 3;
+A[3] = 4;
+A[4] = 3;
+A[5] = 4;
+A[6] = 1;
+A[7] = 2;
+A[8] = 3;
+A[9] = 4;
+A[10] = 6;
+A[11] = 2;
 
 console.log(solution(A));
