@@ -45,26 +45,50 @@
 // N is an integer within the range [1..400,000];
 // each element of array A is an integer within the range [0..1,000,000,000].
 
-const solution = a => {
+const solution = (a) => {
   const len = a.length;
-  const peaks = Array(len);
   const distances = Array(len);
-  let size = 0;
-  let min = len;
-  let max = 0;
+
+  let numOfPeaks = 0;
+  let sumDistances = 0;
   distances[0] = 0;
   let distancesSize = 0;
+
+  const isPeak = (a, i) => a[i - 1] < a[i] && a[i] > a[i + 1];
+
+  let lastPeakIndex = -1;
   for (let i = 1; i < len - 1; i++) {
-    const v = a[i];
-    if (a[i - 1] < v && v > a[i + 1]) {
-      const distance = i - peaks[size - 1];
-      if (size && distance < min) min = distance;
-      else if (distance > max) max = distance;
-      if (size) distances[distancesSize++] = distance;
-      peaks[size++] = i;
+    if (isPeak(a, i)) {
+      if (numOfPeaks) {
+        const distance = i - lastPeakIndex;
+        distances[distancesSize++] = distance;
+        sumDistances += distance;
+      }
+
+      lastPeakIndex = i;
+      numOfPeaks++;
     }
   }
-  return { min, max, peaks, distances };
+
+  if (numOfPeaks < 3) return numOfPeaks;
+
+  let n = Math.ceil(Math.sqrt(sumDistances));
+
+  while (n > 0) {
+    let region = 0;
+    let numOfFlags = 1;
+    for (let i = 0; i < distancesSize; i++) {
+      region += distances[i];
+      if (region >= n) {
+        if (++numOfFlags === n) return n;
+        region = 0;
+      }
+    }
+
+    n--;
+  }
+
+  return 0;
 };
 
 const A = [];
